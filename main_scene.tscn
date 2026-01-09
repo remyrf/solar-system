@@ -1,0 +1,87 @@
+[gd_scene load_steps=12 format=3 uid="uid://dsh3gbr8u4gdf"]
+
+[ext_resource type="Script" uid="uid://bvx2yg0ndm4ht" path="res://planet.gd" id="1_0f027"]
+[ext_resource type="Script" uid="uid://vk53k0sx85q7" path="res://alt_camera.gd" id="2_2c62f"]
+[ext_resource type="Script" uid="uid://cbj0nvw8a28fa" path="res://controller.gd" id="3_gyfs4"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0f027"]
+albedo_color = Color(0.98333335, 1, 0, 1)
+emission_enabled = true
+emission = Color(1, 0.93200004, 0.76, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gyfs4"]
+albedo_color = Color(0.5799998, 0.37, 1, 1)
+emission_enabled = true
+emission = Color(0.6583333, 0.5, 1, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2c62f"]
+albedo_color = Color(0.37, 0.41199994, 1, 1)
+emission_enabled = true
+emission = Color(0.5, 0.5333333, 1, 1)
+
+[sub_resource type="Gradient" id="Gradient_gyfs4"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.9139344)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_d5x1h"]
+frequency = 0.5054
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_8mm7a"]
+width = 2048
+height = 2048
+noise = SubResource("FastNoiseLite_d5x1h")
+color_ramp = SubResource("Gradient_gyfs4")
+in_3d_space = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d5x1h"]
+albedo_color = Color(0, 0, 0, 1)
+emission_enabled = true
+emission_energy_multiplier = 10.0
+emission_texture = SubResource("NoiseTexture2D_8mm7a")
+
+[sub_resource type="BoxMesh" id="BoxMesh_8mm7a"]
+material = SubResource("StandardMaterial3D_d5x1h")
+flip_faces = true
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Sun" type="CSGSphere3D" parent="."]
+radius = 13.0
+material = SubResource("StandardMaterial3D_0f027")
+
+[node name="Neptune" type="CSGSphere3D" parent="." node_paths=PackedStringArray("sun")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 124.22258, 0, 0)
+radius = 2.479012
+material = SubResource("StandardMaterial3D_gyfs4")
+script = ExtResource("1_0f027")
+orbit_speed = 165.0
+sun = NodePath("../Sun")
+cam_distance = 10.0
+
+[node name="Uranus" type="CSGSphere3D" parent="." node_paths=PackedStringArray("sun")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 85.839615, 0, 0)
+radius = 2.5777562
+material = SubResource("StandardMaterial3D_2c62f")
+script = ExtResource("1_0f027")
+orbit_speed = 84.0
+sun = NodePath("../Sun")
+cam_distance = 10.0
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 494.23218, 0)
+current = true
+fov = 31.8
+size = 300.0
+
+[node name="AltCamera" type="Camera3D" parent="."]
+script = ExtResource("2_2c62f")
+
+[node name="Controller" type="Node" parent="." node_paths=PackedStringArray("planets", "camera")]
+script = ExtResource("3_gyfs4")
+planets = [NodePath("../Uranus"), NodePath("../Neptune")]
+camera = NodePath("../AltCamera")
+
+[node name="Sky" type="MeshInstance3D" parent="."]
+transform = Transform3D(1000, 0, 0, 0, 1000, 0, 0, 0, 1000, 0, 0, 0)
+mesh = SubResource("BoxMesh_8mm7a")
+metadata/_edit_lock_ = true
