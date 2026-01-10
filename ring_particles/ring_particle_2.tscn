@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cswa2ms1gxati"]
+
+[ext_resource type="Material" uid="uid://bhxa6feuni8sp" path="res://ring_particles/ring_particle_material.tres" id="1_rgk33"]
+
+[node name="ring_particle_2" type="CSGSphere3D"]
+material = ExtResource("1_rgk33")

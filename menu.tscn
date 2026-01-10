@@ -1,0 +1,93 @@
+[gd_scene load_steps=6 format=3 uid="uid://cjhtrh8gr727f"]
+
+[ext_resource type="FontFile" uid="uid://bcpkwmfql6f34" path="res://m6x11.ttf" id="1_lti8b"]
+[ext_resource type="Script" uid="uid://dwp0qfykpgxxu" path="res://button.gd" id="2_ouk20"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ouk20"]
+font = ExtResource("1_lti8b")
+font_size = 32
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lti8b"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+expand_margin_left = 8.0
+expand_margin_top = 6.0
+expand_margin_right = 8.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lti8b"]
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -298.0
+offset_top = -230.0
+offset_right = 298.0
+offset_bottom = -47.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Controls:
+Click anywhere or press t to toggle planet view
+Press the buttons on screen or the keyboard shortcuts < and > to change planets
+Use the left and right arrow keys to look around while in planet view"
+label_settings = SubResource("LabelSettings_ouk20")
+autowrap_mode = 2
+
+[node name="Loading" type="Label" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -57.25
+offset_top = -14.0
+offset_right = 57.25
+offset_bottom = 14.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Loading..."
+label_settings = SubResource("LabelSettings_ouk20")
+autowrap_mode = 2
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -23.0
+offset_top = 93.0
+offset_right = 23.0
+offset_bottom = 124.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("1_lti8b")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_lti8b")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_lti8b")
+theme_override_styles/hover = SubResource("StyleBoxFlat_lti8b")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_lti8b")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_lti8b")
+text = "Start"
+script = ExtResource("2_ouk20")
+
+[connection signal="button_down" from="Button" to="Button" method="_on_button_down"]

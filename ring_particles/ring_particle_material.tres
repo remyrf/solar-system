@@ -1,0 +1,8 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://bhxa6feuni8sp"]
+
+[ext_resource type="Texture2D" uid="uid://db8p1uvv2osbj" path="res://ring_particles/ring_particle.tres" id="1_i8mo3"]
+
+[resource]
+albedo_texture = ExtResource("1_i8mo3")
+emission_enabled = true
+emission_texture = ExtResource("1_i8mo3")
