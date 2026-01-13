@@ -45,7 +45,7 @@ grow_vertical = 2
 text = "Controls:
 Click anywhere or press t to toggle planet view
 Press the buttons on screen or the keyboard shortcuts < and > to change planets
-Use the left and right arrow keys to look around while in planet view"
+Use the left and right arrow keys or press the buttons next to the planet to look around while in planet view"
 label_settings = SubResource("LabelSettings_ouk20")
 autowrap_mode = 2
 

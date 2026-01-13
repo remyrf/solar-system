@@ -1,9 +1,10 @@
-[gd_scene load_steps=36 format=3 uid="uid://dsh3gbr8u4gdf"]
+[gd_scene load_steps=39 format=3 uid="uid://dsh3gbr8u4gdf"]
 
 [ext_resource type="Script" uid="uid://bvx2yg0ndm4ht" path="res://planet.gd" id="1_0f027"]
 [ext_resource type="Texture2D" uid="uid://b1dv0hgr01iag" path="res://neptune.tres" id="1_d5x1h"]
 [ext_resource type="Texture2D" uid="uid://bygwxmbpbsp72" path="res://sun.tres" id="1_hq1ik"]
 [ext_resource type="Script" uid="uid://vk53k0sx85q7" path="res://alt_camera.gd" id="2_2c62f"]
+[ext_resource type="Script" uid="uid://cbhv6gjmru2wb" path="res://focusable.gd" id="2_7th4q"]
 [ext_resource type="Texture2D" uid="uid://b7e8x6kdan5mv" path="res://mars.tres" id="2_671wp"]
 [ext_resource type="Texture2D" uid="uid://dcab1af3dlwla" path="res://mercury.tres" id="2_m35m6"]
 [ext_resource type="Texture2D" uid="uid://bmfykrokbams6" path="res://earth.png" id="2_mo76n"]
@@ -15,6 +16,7 @@
 [ext_resource type="Texture2D" uid="uid://0yq11v45cgej" path="res://venus.tres" id="4_2jcla"]
 [ext_resource type="PackedScene" uid="uid://dgxcoyugoy3cg" path="res://ring_particles/ring_particle_1.tscn" id="4_wr18j"]
 [ext_resource type="PackedScene" uid="uid://cswa2ms1gxati" path="res://ring_particles/ring_particle_2.tscn" id="5_qwutr"]
+[ext_resource type="Texture2D" uid="uid://blfan4xv4eods" path="res://moon.tres" id="6_u0ygc"]
 [ext_resource type="FontFile" uid="uid://bcpkwmfql6f34" path="res://m6x11.ttf" id="14_42l1d"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0f027"]
@@ -36,7 +38,7 @@ height = 4.0
 _data = [Vector2(0.011560693, 0.60850585), 0.0, 0.0, 0, 0, Vector2(0.9971099, 0.019770145), -1.7233719, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u0ygc"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7th4q"]
 albedo_texture = ExtResource("2_m35m6")
 emission_enabled = true
 emission_texture = ExtResource("2_m35m6")
@@ -50,6 +52,11 @@ emission_texture = ExtResource("4_2jcla")
 albedo_texture = ExtResource("2_mo76n")
 emission_enabled = true
 emission_texture = ExtResource("2_mo76n")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u0ygc"]
+albedo_texture = ExtResource("6_u0ygc")
+emission_enabled = true
+emission_texture = ExtResource("6_u0ygc")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mo76n"]
 albedo_texture = ExtResource("2_671wp")
@@ -102,7 +109,7 @@ flip_faces = true
 
 [sub_resource type="LabelSettings" id="LabelSettings_2jcla"]
 font = ExtResource("14_42l1d")
-font_size = 32
+font_size = 48
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_42l1d"]
 
@@ -114,6 +121,8 @@ radius = 13.0
 radial_segments = 32
 rings = 16
 material = SubResource("StandardMaterial3D_0f027")
+script = ExtResource("2_7th4q")
+cam_distance = 50.0
 
 [node name="CPUParticles3D" type="CPUParticles3D" parent="Sun"]
 amount = 100
@@ -130,16 +139,16 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26.457546, 0, 0)
 radius = 0.8000269
 radial_segments = 32
 rings = 16
-material = SubResource("StandardMaterial3D_u0ygc")
+material = SubResource("StandardMaterial3D_7th4q")
 script = ExtResource("1_0f027")
 orbit_speed = 0.241
 rotation_speed = 1416.0
 sun = NodePath("../Sun")
-cam_distance = 5.0
 angle = 0.035
+cam_distance = 4.0
 
 [node name="Venus" type="CSGSphere3D" parent="." node_paths=PackedStringArray("sun")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35.652046, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 37.647457, 0, 0)
 radius = 2.2055707
 radial_segments = 32
 rings = 16
@@ -148,11 +157,11 @@ script = ExtResource("1_0f027")
 orbit_speed = 0.616
 rotation_speed = 5832.0
 sun = NodePath("../Sun")
-cam_distance = 8.0
 angle = 0.052
+cam_distance = 8.0
 
 [node name="Earth" type="CSGSphere3D" parent="." node_paths=PackedStringArray("sun")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42.85169, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50.12229, 0, 0)
 radius = 2.3536398
 radial_segments = 32
 rings = 16
@@ -160,11 +169,25 @@ material = SubResource("StandardMaterial3D_42l1d")
 script = ExtResource("1_0f027")
 rotation_speed = 23.9
 sun = NodePath("../Sun")
-cam_distance = 8.0
 angle = 0.44
+cam_distance = 8.0
+
+[node name="The Moon" type="CSGSphere3D" parent="." node_paths=PackedStringArray("sun")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 57.433407, 0, 0)
+radius = 0.57843286
+radial_segments = 32
+rings = 16
+material = SubResource("StandardMaterial3D_u0ygc")
+script = ExtResource("1_0f027")
+orbit_speed = 0.2
+tidally_locked = true
+rotation_speed = 27.3
+sun = NodePath("../Earth")
+angle = 0.1
+cam_distance = 4.0
 
 [node name="Mars" type="CSGSphere3D" parent="." node_paths=PackedStringArray("sun")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50.599808, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 67.09129, 0, 0)
 radius = 1.1646446
 radial_segments = 32
 rings = 16
@@ -173,11 +196,11 @@ script = ExtResource("1_0f027")
 orbit_speed = 1.88
 rotation_speed = 24.6
 sun = NodePath("../Sun")
-cam_distance = 5.0
 angle = 0.44
+cam_distance = 5.0
 
 [node name="Jupiter" type="CSGSphere3D" parent="." node_paths=PackedStringArray("sun")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 90.67916, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 115.783394, 0, 0)
 radius = 7.316319
 radial_segments = 32
 rings = 16
@@ -186,11 +209,11 @@ script = ExtResource("1_0f027")
 orbit_speed = 12.0
 rotation_speed = 9.9
 sun = NodePath("../Sun")
-cam_distance = 40.0
 angle = 0.052
+cam_distance = 30.0
 
 [node name="Saturn" type="CSGSphere3D" parent="." node_paths=PackedStringArray("sun")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 151.58455, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 180.37772, 0, 0)
 radius = 6.508528
 radial_segments = 32
 rings = 16
@@ -199,11 +222,11 @@ script = ExtResource("3_66tet")
 particle_scenes = Array[PackedScene]([ExtResource("4_wr18j"), ExtResource("5_qwutr")])
 orbit_speed = 29.0
 sun = NodePath("../Sun")
-cam_distance = 40.0
 angle = 0.47
+cam_distance = 40.0
 
 [node name="Uranus" type="CSGSphere3D" parent="." node_paths=PackedStringArray("sun")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 257.62805, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 300.08817, 0, 0)
 radius = 2.5777562
 radial_segments = 32
 rings = 16
@@ -211,8 +234,8 @@ material = SubResource("StandardMaterial3D_2c62f")
 script = ExtResource("1_0f027")
 orbit_speed = 84.0
 sun = NodePath("../Sun")
-cam_distance = 10.0
 angle = 1.71
+cam_distance = 10.0
 
 [node name="Neptune" type="CSGSphere3D" parent="." node_paths=PackedStringArray("sun")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 412.59192, 0, 0)
@@ -223,8 +246,8 @@ material = SubResource("StandardMaterial3D_gyfs4")
 script = ExtResource("1_0f027")
 orbit_speed = 165.0
 sun = NodePath("../Sun")
-cam_distance = 10.0
 angle = 0.49
+cam_distance = 10.0
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 1461.5339, 0)
@@ -234,10 +257,11 @@ size = 300.0
 
 [node name="AltCamera" type="Camera3D" parent="."]
 script = ExtResource("2_2c62f")
+speed = null
 
 [node name="Controller" type="Node" parent="." node_paths=PackedStringArray("planets", "camera")]
 script = ExtResource("3_gyfs4")
-planets = [NodePath("../Mercury"), NodePath("../Venus"), NodePath("../Earth"), NodePath("../Mars"), NodePath("../Jupiter"), NodePath("../Saturn"), NodePath("../Uranus"), NodePath("../Neptune")]
+planets = [NodePath("../Sun"), NodePath("../Mercury"), NodePath("../Venus"), NodePath("../Earth"), NodePath("../The Moon"), NodePath("../Mars"), NodePath("../Jupiter"), NodePath("../Saturn"), NodePath("../Uranus"), NodePath("../Neptune")]
 camera = NodePath("../AltCamera")
 
 [node name="Sky" type="MeshInstance3D" parent="."]
@@ -245,42 +269,107 @@ transform = Transform3D(1500, 0, 0, 0, 1500, 0, 0, 0, 1500, 0, 0, 0)
 mesh = SubResource("BoxMesh_8mm7a")
 metadata/_edit_lock_ = true
 
-[node name="UI" type="MarginContainer" parent="."]
+[node name="UI" type="Control" parent="."]
 unique_name_in_owner = true
+layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 16
-theme_override_constants/margin_top = 16
-theme_override_constants/margin_right = 16
-theme_override_constants/margin_bottom = 16
+mouse_filter = 1
 
 [node name="PlanetName" type="Label" parent="UI"]
 unique_name_in_owner = true
-layout_mode = 2
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+offset_left = 257.0
+offset_top = 39.0
+offset_right = -257.0
+offset_bottom = 81.0
+grow_horizontal = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
 text = "Saturn"
 label_settings = SubResource("LabelSettings_2jcla")
+horizontal_alignment = 1
 
 [node name="Left" type="Button" parent="UI"]
-layout_mode = 2
+layout_mode = 0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 60.0
+offset_bottom = 108.0
 size_flags_horizontal = 0
-size_flags_vertical = 8
+size_flags_vertical = 0
 theme_override_fonts/font = ExtResource("14_42l1d")
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 96
 theme_override_styles/focus = SubResource("StyleBoxEmpty_42l1d")
 text = "<"
 flat = true
 
 [node name="Right" type="Button" parent="UI"]
-layout_mode = 2
+layout_mode = 0
+offset_left = 580.0
+offset_top = 16.0
+offset_right = 624.0
+offset_bottom = 108.0
 size_flags_horizontal = 8
-size_flags_vertical = 8
+size_flags_vertical = 0
 theme_override_fonts/font = ExtResource("14_42l1d")
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 96
+theme_override_styles/focus = SubResource("StyleBoxEmpty_42l1d")
+text = ">"
+flat = true
+
+[node name="Buttons" type="Control" parent="UI"]
+anchors_preset = 0
+offset_left = 320.0
+offset_top = 320.0
+offset_right = 320.0
+offset_bottom = 320.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="SpinLeft" type="Button" parent="UI/Buttons"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = -261.0
+offset_top = -40.0
+offset_right = -217.0
+offset_bottom = 52.0
+grow_horizontal = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+theme_override_colors/font_color = Color(0.5191619, 0.5191619, 0.5191619, 1)
+theme_override_colors/font_focus_color = Color(0.654902, 0.654902, 0.654902, 1)
+theme_override_colors/font_pressed_color = Color(0.654902, 0.654902, 0.654902, 1)
+theme_override_fonts/font = ExtResource("14_42l1d")
+theme_override_font_sizes/font_size = 96
+theme_override_styles/focus = SubResource("StyleBoxEmpty_42l1d")
+text = "<"
+flat = true
+
+[node name="SpinRight" type="Button" parent="UI/Buttons"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 207.0
+offset_top = -41.0
+offset_right = 251.0
+offset_bottom = 51.0
+grow_horizontal = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+theme_override_colors/font_color = Color(0.5191619, 0.5191619, 0.5191619, 1)
+theme_override_colors/font_focus_color = Color(0.654902, 0.654902, 0.654902, 1)
+theme_override_colors/font_pressed_color = Color(0.6542321, 0.6542321, 0.654232, 1)
+theme_override_fonts/font = ExtResource("14_42l1d")
+theme_override_font_sizes/font_size = 96
 theme_override_styles/focus = SubResource("StyleBoxEmpty_42l1d")
 text = ">"
 flat = true

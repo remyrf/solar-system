@@ -1,13 +1,13 @@
 extends Node
 
 
-@export var planets: Array[Planet]
+@export var planets: Array[Focusable]
 @export var camera: AltCamera
 
 var planet_index := 0
 
 @onready var planet_name: Label = %PlanetName
-@onready var ui: MarginContainer = %UI
+@onready var ui: Control = %UI
 
 
 func _process(_delta: float) -> void:
